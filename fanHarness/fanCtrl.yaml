@@ -1,0 +1,153 @@
+connectors:
+  battDist:
+    style: simple
+    type: M6 Ring
+  Relay:
+    type: sealed relay
+    pinlabels: [COILP, COILN, COM, NOP]
+  Controller:
+    type: MX120G
+    pincount: 12
+    pinlabels: [12V, SENS, PWM, OVR, PROG, TX, GND1, GND2, GND3]
+  12vSplice1:
+    style: simple
+    type: crimp ferrule
+    autogenerate: false
+    subtype: big
+  AccSplice1:
+    style: simple
+    type: crimp ferrule
+    autogenerate: false
+    subtype: big    
+  GNDSplice2:
+    style: simple
+    type: crimp ferrule
+    autogenerate: false
+    subtype: small
+  GNDSplice3:
+    style: simple
+    type: crimp ferrule
+    autogenerate: false
+    subtype: big    
+  temp_sens:
+    type: metripack 150
+    pincount: 2
+  fan_ctrl:
+    type: sumo
+    pinlabels: [12V, PWM, GND]
+  ACC_PWR:
+    style: simple
+    type: crimp ferrule
+  OVR_SW:
+    type: switch
+    pincount: 2
+  Fuse:
+    type: metripack 280
+    pincount: 2    
+  GND_RING:
+    style: simple
+    type: M6 Ring
+
+cables:
+  W1:
+    category: bundle
+    length: 0.2
+    gauge: 16 awg
+    wirecount: 1
+  W2:
+    category: bundle
+    length: 0.2
+    gauge: 16 awg
+    wirecount: 2
+  W3:
+    category: bundle
+    length: 0.6
+    gauge: 16 awg
+    wirecount: 1
+  W4:
+    category: bundle
+    length: 0.2
+    gauge: 20 awg
+    wirecount: 4
+  W5: 
+    category: bundle
+    length: 0.5
+    gauge: 20 awg
+    wirecount: 2  
+  W6: 
+    category: bundle
+    length: 1.5
+    gauge: 20 awg
+    wirecount: 2      
+  W7: 
+    category: bundle
+    length: 3
+    gauge: 20 awg
+    wirecount: 3    
+  W8:
+    category: bundle
+    length: 0.5
+    gauge: 16 awg
+    wirecount: 2    
+  
+connections:
+  - # Batt supply
+    - battDist
+    - W1: 1
+    - Fuse: 1
+  - # Fused Batt
+    - Fuse: 2
+    - W2: 1
+    - 12vSplice1
+  - # Fused Batt
+    - Relay: COM
+    - W2: 2
+    - 12vSplice1
+  - # Main Power
+    - Relay: NOP
+    - W3: 1
+    - fan_ctrl: 12V
+  - # Grounding Relay Coil
+    - Relay: COILN
+    - W4: 1
+    - GNDSplice2: 1
+  - # PWM to Controller
+    - Controller: PWM
+    - W5: 1
+    - fan_ctrl: PWM
+  - # Sensor Harness
+    - Controller: [SENS,GND2]
+    - W6: [1,2]
+    - temp_sens: [1,2]
+  - # Override Switch
+    - Controller: [OVR,GND3]
+    - W7: [1,2]
+    - OVR_SW: [1,2]
+  - # Controller Ground
+    - Controller: GND1
+    - W4: 2
+    - GNDSplice2: 1
+  - # Logic Ground
+    - GNDSplice2: 1
+    - W5: 2
+    - GND_RING: 1
+  - # Relay Coil Power
+    - Relay: COILP
+    - W4: 3
+    - AccSplice1: 1
+  - # Controller power
+    - Controller: 12V
+    - W4: 4
+    - AccSplice1: 1
+  - # ACC Splice to Cabin
+    - AccSplice1: 1
+    - W7: 3
+    - ACC_PWR: 1
+  - # Fan Ground
+    - fan_ctrl: GND
+    - W8: 1
+    - GNDSplice3: 1
+  - # Splice to Ground
+    - GND_RING: 1
+    - W8: 2
+    - GNDSplice3: 1
