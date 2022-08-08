@@ -2,12 +2,12 @@ Id	Description	Qty	Unit	Designators
 1	Connector, M6 Ring	2		GND_RING, battDist
 2	Connector, MX120G, 12 pins	1		Controller
 3	Connector, crimp ferrule	1		ACC_PWR
-4	Connector, crimp ferrule, big	3		12vSplice1, AccSplice1, GNDSplice3
+4	Connector, crimp ferrule, big	4		12vSplice1, AccSplice1, FusedSplice1, GNDSplice3
 5	Connector, crimp ferrule, small	1		GNDSplice2
 6	Connector, metripack 150, 2 pins	1		temp_sens
 7	Connector, metripack 280, 2 pins	1		Fuse
 8	Connector, sealed relay, 4 pins	1		Relay
 9	Connector, sumo, 3 pins	1		fan_ctrl
 10	Connector, switch, 2 pins	1		OVR_SW
-11	Wire, 16 AWG	2.2	m	W1, W2, W3, W8
+11	Wire, 16 AWG	2.4	m	W1, W2, W3, W8
 12	Wire, 20 AWG	13.8	m	W4, W5, W6, W7

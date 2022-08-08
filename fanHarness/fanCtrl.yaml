@@ -9,11 +9,16 @@ connectors:
     type: MX120G
     pincount: 12
     pinlabels: [12V, SENS, PWM, OVR, PROG, TX, GND1, GND2, GND3]
-  12vSplice1:
+  FusedSplice1:
     style: simple
     type: crimp ferrule
     autogenerate: false
     subtype: big
+  12vSplice1:
+    style: simple
+    type: crimp ferrule
+    autogenerate: false
+    subtype: big    
   AccSplice1:
     style: simple
     type: crimp ferrule
@@ -53,7 +58,7 @@ cables:
     category: bundle
     length: 0.2
     gauge: 16 awg
-    wirecount: 1
+    wirecount: 2
   W2:
     category: bundle
     length: 0.2
@@ -89,65 +94,69 @@ cables:
     length: 0.5
     gauge: 16 awg
     wirecount: 2    
-  
+
 connections:
-  - # Batt supply
-    - battDist
+  - # Batt supply 71cm
+    - battDist: 1
     - W1: 1
+    - 12vSplice1
+  - # Batt Splice to Fuse 25cm
     - Fuse: 1
-  - # Fused Batt
+    - W1: 2
+    - 12vSplice1
+  - # Fused Batt 25cm
     - Fuse: 2
     - W2: 1
-    - 12vSplice1
-  - # Fused Batt
+    - FusedSplice1
+  - # Fused Batt 25cm
     - Relay: COM
     - W2: 2
-    - 12vSplice1
-  - # Main Power
+    - FusedSplice1
+  - # Main Power 225cm
     - Relay: NOP
     - W3: 1
     - fan_ctrl: 12V
-  - # Grounding Relay Coil
+  - # Grounding Relay Coil 25cm
     - Relay: COILN
     - W4: 1
     - GNDSplice2: 1
-  - # PWM to Controller
+  - # PWM to Controller 225cm
     - Controller: PWM
     - W5: 1
     - fan_ctrl: PWM
-  - # Sensor Harness
+  - # Sensor Harness 130cm
     - Controller: [SENS,GND2]
     - W6: [1,2]
     - temp_sens: [1,2]
-  - # Override Switch
+  - # Override Switch 360cm
     - Controller: [OVR,GND3]
     - W7: [1,2]
     - OVR_SW: [1,2]
-  - # Controller Ground
+  - # Controller Ground  25cm
     - Controller: GND1
     - W4: 2
     - GNDSplice2: 1
-  - # Logic Ground
+  - # Logic Ground 225cm
     - GNDSplice2: 1
     - W5: 2
     - GND_RING: 1
-  - # Relay Coil Power
+  - # Relay Coil Power 30cm
     - Relay: COILP
     - W4: 3
     - AccSplice1: 1
-  - # Controller power
+  - # Controller power 30cm
     - Controller: 12V
     - W4: 4
     - AccSplice1: 1
-  - # ACC Splice to Cabin
+  - # ACC Splice to Cabin 300cm
     - AccSplice1: 1
     - W7: 3
     - ACC_PWR: 1
-  - # Fan Ground
+  - # Fan Ground 25cm
     - fan_ctrl: GND
     - W8: 1
     - GNDSplice3: 1
-  - # Splice to Ground
+  - # Splice to Ground 25cm
     - GND_RING: 1
     - W8: 2
     - GNDSplice3: 1

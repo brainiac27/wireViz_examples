@@ -117,6 +117,21 @@ graph {
  </td></tr>
 </table>
 > fillcolor="#FFFFFF" shape=box style=filled]
+	FusedSplice1 [label=<
+<table border="0" cellspacing="0" cellpadding="0">
+ <tr><td>
+  <table border="0" cellspacing="0" cellpadding="3" cellborder="1"><tr>
+   <td balign="left">FusedSplice1</td>
+  </tr></table>
+ </td></tr>
+ <tr><td>
+  <table border="0" cellspacing="0" cellpadding="3" cellborder="1"><tr>
+   <td balign="left">crimp ferrule</td>
+   <td balign="left">big</td>
+  </tr></table>
+ </td></tr>
+</table>
+> fillcolor="#FFFFFF" shape=box style=filled]
 	"12vSplice1" [label=<
 <table border="0" cellspacing="0" cellpadding="0">
  <tr><td>
@@ -291,11 +306,9 @@ graph {
  <tr><td>
   <table border="0" cellspacing="0" cellpadding="3" cellborder="1">
    <tr>
-    <td port="p1l">1</td>
     <td port="p1r">1</td>
    </tr>
    <tr>
-    <td port="p2l">2</td>
     <td port="p2r">2</td>
    </tr>
   </table>
@@ -318,7 +331,10 @@ graph {
 > fillcolor="#FFFFFF" shape=box style=filled]
 	edge [color="#000000:#ffffff:#000000"]
 	battDist:e -- W1:w1:w
-	W1:w1:e -- Fuse:p1l:w
+	W1:w1:e -- "12vSplice1":w
+	edge [color="#000000:#ffffff:#000000"]
+	Fuse:p1r:e -- W1:w2:w
+	W1:w2:e -- "12vSplice1":w
 	W1 [label=<
 <table border="0" cellspacing="0" cellpadding="0">
  <tr><td>
@@ -328,7 +344,7 @@ graph {
  </td></tr>
  <tr><td>
   <table border="0" cellspacing="0" cellpadding="3" cellborder="1"><tr>
-   <td balign="left">1x</td>
+   <td balign="left">2x</td>
    <td balign="left">16 AWG</td>
    <td balign="left">0.2 m</td>
   </tr></table>
@@ -341,10 +357,26 @@ graph {
     <td>
      
     </td>
-    <td>Fuse:1</td>
+    <td>12vSplice1:1</td>
    </tr>
    <tr>
     <td colspan="3" border="0" cellspacing="0" cellpadding="0" port="w1" height="6">
+     <table cellspacing="0" cellborder="0" border="0">
+      <tr><td colspan="3" cellpadding="0" height="2" bgcolor="#000000" border="0"></td></tr>
+      <tr><td colspan="3" cellpadding="0" height="2" bgcolor="#ffffff" border="0"></td></tr>
+      <tr><td colspan="3" cellpadding="0" height="2" bgcolor="#000000" border="0"></td></tr>
+     </table>
+    </td>
+   </tr>
+   <tr>
+    <td>Fuse:1</td>
+    <td>
+     
+    </td>
+    <td>12vSplice1:1</td>
+   </tr>
+   <tr>
+    <td colspan="3" border="0" cellspacing="0" cellpadding="0" port="w2" height="6">
      <table cellspacing="0" cellborder="0" border="0">
       <tr><td colspan="3" cellpadding="0" height="2" bgcolor="#000000" border="0"></td></tr>
       <tr><td colspan="3" cellpadding="0" height="2" bgcolor="#ffffff" border="0"></td></tr>
@@ -359,10 +391,10 @@ graph {
 > fillcolor="#FFFFFF" shape=box style="filled,dashed"]
 	edge [color="#000000:#ffffff:#000000"]
 	Fuse:p2r:e -- W2:w1:w
-	W2:w1:e -- "12vSplice1":w
+	W2:w1:e -- FusedSplice1:w
 	edge [color="#000000:#ffffff:#000000"]
 	Relay:p3r:e -- W2:w2:w
-	W2:w2:e -- "12vSplice1":w
+	W2:w2:e -- FusedSplice1:w
 	W2 [label=<
 <table border="0" cellspacing="0" cellpadding="0">
  <tr><td>
@@ -385,7 +417,7 @@ graph {
     <td>
      
     </td>
-    <td>12vSplice1:1</td>
+    <td>FusedSplice1:1</td>
    </tr>
    <tr>
     <td colspan="3" border="0" cellspacing="0" cellpadding="0" port="w1" height="6">
@@ -401,7 +433,7 @@ graph {
     <td>
      
     </td>
-    <td>12vSplice1:1</td>
+    <td>FusedSplice1:1</td>
    </tr>
    <tr>
     <td colspan="3" border="0" cellspacing="0" cellpadding="0" port="w2" height="6">
